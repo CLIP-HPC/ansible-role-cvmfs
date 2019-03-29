@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+#
+CVMFS_HTTP_PROXY={{cvmfs_http_proxy}}
+{% if cvmfs_quota_limit %}
+CVMFS_QUOTA_LIMIT={{cvmfs_quota_limit}}
+{% endif %}

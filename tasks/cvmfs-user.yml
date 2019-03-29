@@ -1,0 +1,5 @@
+---
+- name: Create CVMFS group
+  group:
+    name: cvmfs
+    state: present

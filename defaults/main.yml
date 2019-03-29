@@ -1,0 +1,9 @@
+---
+# defaults file for hephy.cvmfs-client
+cvmfs_manage_repo: true
+cvmfs_repo_enabled: true
+cvmfs_repo_testing_enabled: false
+cvmfs_repo_config_enabled: false
+cvmfs_repo_priority: 10
+cvmfs_manage_user: true
+cvmfs_manage_
