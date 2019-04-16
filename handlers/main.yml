@@ -3,4 +3,4 @@
 - name: Restart autofs
   service:
     name: autofs
-    satte: restarted
+    state: restarted
