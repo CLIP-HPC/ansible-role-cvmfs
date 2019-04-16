@@ -47,12 +47,12 @@
     __cvmfs_client_partition_size: "{{ ansible_mounts | json_query(jq) }}"
   vars:
     jq: "[?mount=='{{ cvmfs_client_cache_base }}'].size_total"
-  when: cvmfs_client_cache_quota <= 0
+  when: cvmfs_client_quota_limit <= 0
 
 - name: Fail in case the partition size cannot be determined
   fail:
     msg: "Cannot determine size of partition for mount point {{ cvmfs_client_cache_base }}"
-  when: cvmfs_client_cache_quota <= 0 and __cvmfs_partition_size | length  == 0
+  when: cvmfs_client_quota_limit <= 0 and __cvmfs_partition_size | length  == 0
 
 - name: Configure CVMFS
   template:

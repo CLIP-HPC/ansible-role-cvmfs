@@ -10,6 +10,6 @@ cvmfs_client_manage_autofs: true
 cvmfs_client_http_proxy:
   - DIRECT
 cvmfs_client_quota_limit: 0
-cvmfs_client_quota_rato: 0.85
+cvmfs_client_quota_ratio: 0.85
 cvmfs_client_cache_base: /var/cache/cvmfs
 cvmfs_client_env_vars: {}
