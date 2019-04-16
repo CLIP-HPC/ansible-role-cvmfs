@@ -35,7 +35,7 @@
         home: /var/lib/cvmfs
         shell: /sbin/nologin
         comment: "CernVM-FS service account"
-  when: cvmfs_client_manage_cvmfs_user and ansible_virtualisation != 'docker'
+  when: cvmfs_client_manage_cvmfs_user and ansible_virtualization_type != 'docker'
 
 - name: Set permission for home dir
   file:
@@ -73,4 +73,4 @@
         name: autofs
         enabled: true
         state: started
-  when: cvmfs_client_manage_autofs and ansible_virtualisation != 'docker'
+  when: cvmfs_client_manage_autofs and ansible_virtualization_type != 'docker'
