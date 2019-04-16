@@ -77,7 +77,7 @@
 - name: Configure respositories
   template:
     src: repository.local.j2
-    dest: "/etc/cvmfs/control.d/{{ repository.name }}.local"
+    dest: "/etc/cvmfs/config.d/{{ repository.name }}.local"
   loop: "{{ cvmfs_client_repositories }}"
   loop_control:
     loop_var: repository
