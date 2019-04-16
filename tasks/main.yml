@@ -30,7 +30,6 @@
       user:
         name: cvmfs
         group: cvmfs
-        groups: fuse
         system: true
         home: /var/lib/cvmfs
         shell: /sbin/nologin
