@@ -2,13 +2,13 @@
 # tasks file for hephy.cvmfs-client
 - name: Load OS specific vars
   include_vars: "{{ item }}"
-  first_found:
-    - "{{ ansible_os_family }}-{{ ansible_distribution_major_version}}.yaml"
-    - "{{ ansible_os_family }}.yaml"
+  with_first_found:
+    - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_os_family }}.yml"
 
 - name: Enable CVMFS repository
   include_tasks: cvmfs-yumrepo.yml
-  when: cvmfs_manage_repo
+  when: cvmfs_client_manage_repo
 
 - name: Install cvmfs
   package:
@@ -22,10 +22,12 @@
 
 - name: Create CVMFS user and group
   block:
-    - group:
+    - name: Create group
+      group:
         name: cvmfs
         system: true
-    - user:
+    - name: Create user
+      user:
         name: cvmfs
         group: cvmfs
         groups: fuse
@@ -33,7 +35,7 @@
         home: /var/lib/cvmfs
         shell: /sbin/nologin
         comment: "CernVM-FS service account"
-  when: cvmfs_manage_user
+  when: cvmfs_client_manage_cvmfs_user and ansible_virtualisation != 'docker'
 
 - name: Set permission for home dir
   file:
@@ -41,15 +43,34 @@
     owner: cvmfs
     group: cvmfs
 
+- name: Get size of CVMFS partition
+  set_fact:
+    __cvmfs_client_partition_size: "{{ ansible_mounts | json_query(jq) }}"
+  vars:
+    jq: "[?mount=='{{ cvmfs_client_cache_base }}'].size_total"
+  when: cvmfs_client_cache_quota <= 0
+
+- name: Fail in case the partition size cannot be determined
+  fail:
+    msg: "Cannot determine size of partition for mount point {{ cvmfs_client_cache_base }}"
+  when: cvmfs_client_cache_quota <= 0 and __cvmfs_partition_size | length  == 0
+
+- name: Configure CVMFS
+  template:
+    src: default.local.j2
+    dest: /etc/cvmfs/default.local
+
 - name: Configure autofs
   block:
-    - lineinfile:
+    - name: Add cvmfs to /etc/auto.master
+      lineinfile:
         path: /etc/auto.master
         regexp: "^/cvmfs"
         line: "/cvmfs  program:/etc/auto.cvmfs"
-      notify: restart autofs
-    - service:
+      notify: Restart autofs
+    - name: Start autofs
+      service:
         name: autofs
         enabled: true
         state: started
-  when: cvmfs_manage_autofs
+  when: cvmfs_client_manage_autofs and ansible_virtualisation != 'docker'

@@ -2,5 +2,6 @@
 - name: Converge
   hosts: all
   roles:
-    - hephy.repo-cvmfs
-    - hephy.cvmfs-client
+    - role: hephy.cvmfs-client
+      vars:
+        cvmfs_client_cache_quota: 4000

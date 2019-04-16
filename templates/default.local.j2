@@ -1,6 +1,14 @@
-# {{ ansible_managed }}
-#
-CVMFS_HTTP_PROXY={{cvmfs_http_proxy}}
-{% if cvmfs_quota_limit %}
-CVMFS_QUOTA_LIMIT={{cvmfs_quota_limit}}
+{{ ansible_managed | comment }}
+{% if cvmfs_client_repositories |default(false) %}
+CVMFS_REPOSITORIES={{ cvmfs_client_repositories.join(',') }}
 {% endif %}
+CVMFS_HTTP_PROXY={{ cvmfs_client_http_proxy.join(',') }}
+{% if cvmfs_client_quota_limit > 0 %}
+CVMFS_QUOTA_LIMIT={{ cvmfs_client_quota_limit }}
+{% else %}
+CVMFS_QUOTA_LIMIT={{ __cvmfs_client_partition_size * cvmfs_client_quota_factor | int }}
+{% endif %}
+CVMFS_CACHE_BASE={{ cvmfs_client_cache_base }}
+{% for var, value in cvmfs_client_env_vars.items() %}
+{{ var }}={{ value }}
+{% endfor %}

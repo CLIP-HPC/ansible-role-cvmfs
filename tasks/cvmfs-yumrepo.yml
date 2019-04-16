@@ -2,46 +2,46 @@
 - name: Install CVMFS repository
   yum_repository:
     name: cvmfs
-    description: "CVMFS yum repository for el{{ ansible_major_version}}"
-    baseurl: "{{ cvmfs_repo_url }}"
-    enabled: "{{ cvmfs_repo_enable }}"
-    gpgcheck: True
+    description: "CVMFS yum repository for el{{ ansible_distribution_major_version }}"
+    baseurl: "{{ cvmfs_client_repo_url }}"
+    enabled: "{{ cvmfs_client_repo_enabled }}"
+    gpgcheck: true
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM
     includepkgs:
       - cvmfs
       - cvmfs-keys
       - cvmfs-server
       - cvmfs-config-default
-    priority: "{{ cvmfs_repo_priority }}"
+    priority: "{{ cvmfs_client_repo_priority }}"
 
 - name: Install CVMFS testing repository
   yum_repository:
     name: cmfs-testing
-    description: "CVMFS yum testing repository for el{{ ansible_major_versionj }}"
-    baseurl: "{{ cvmfs_repo_testing_url }}"
-    enabled: "{{ cvmfs_repo_testing_enabled}}"
-    gpgcheck: True
+    description: "CVMFS yum testing repository for el{{ ansible_distribution_major_version }}"
+    baseurl: "{{ cvmfs_client_repo_testing_url }}"
+    enabled: "{{ cvmfs_client_repo_testing_enabled }}"
+    gpgcheck: true
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM
     includepkgs:
       - cvmfs
       - cvmfs-keys
       - cvmfs-server
       - cvmfs-config-default
-    priority: "{{ cvmfs_repo_priority }}"
+    priority: "{{ cvmfs_client_repo_priority }}"
 
 - name: Install CVMFS config repository
   yum_repository:
     name: cvmfs-config
-    description: "CVMFS yum config repository for el{{ ansible_major_versionj }}"
-    baseurl: "{{ cvmfs_repo_config_url }}"
-    enabled: "{{ cvmfs_repo_config_enabled}}"
-    gpgcheck: True
+    description: "CVMFS yum config repository for el{{ ansible_distribution_major_version }}"
+    baseurl: "{{ cvmfs_client_repo_config_url }}"
+    enabled: "{{ cvmfs_client_repo_config_enabled }}"
+    gpgcheck: true
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM
-    priority: "{{ cvmfs_repo_priority }}"
+    priority: "{{ cvmfs_client_repo_priority }}"
 
 
 - name: Install CernVM gpgkey
-  file:
+  copy:
     src: RPM-GPG-KEY-CernVM
     dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM
 

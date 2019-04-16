@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Dietrich Liko
-  description: your description
+  description: CVMFS client
   company: Institute for High energy Physics, Austrian Academy of Sciences
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -33,17 +33,11 @@ galaxy_info:
   #
   # platforms is a list of platforms, and each platform has a name and a list of versions.
   #
-  # platforms:
-  # - name: Fedora
-  #   versions:
-  #   - all
-  #   - 25
-  # - name: SomePlatform
-  #   versions:
-  #   - all
-  #   - 1.0
-  #   - 7
-  #   - 99.99
+  platforms:
+    - name: RedHat
+      versions:
+        - 6
+        - 7
 
   galaxy_tags: []
   # List tags for your role here, one per line. A tag is a keyword that describes

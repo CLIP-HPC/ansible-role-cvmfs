@@ -1,3 +1,0 @@
----
-- name: hephy.repo-cvmfs
-  src: https://gitlab.cern.ch/hephy-comp/ansible-role-repo-cvmfs.git
