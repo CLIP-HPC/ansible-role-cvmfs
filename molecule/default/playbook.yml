@@ -5,7 +5,7 @@
   roles:
     - role: hephy.cvmfs-client
       vars:
-        cvmfs_client_cache_quota: 4000
+        cvmfs_client_quota_limit: 4000
         cvmfs_client_repositories:
           - name: cms.cern.ch
             env_vars:
