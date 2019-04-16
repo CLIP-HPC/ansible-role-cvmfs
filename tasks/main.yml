@@ -73,3 +73,11 @@
         enabled: true
         state: started
   when: cvmfs_client_manage_autofs and ansible_virtualization_type != 'docker'
+
+- name: Configure respositories
+  template:
+    src: repository.local.j2
+    dest: "/etc/cvmfs/control.d/{{ repository.name }}.local"
+  loop: "{{ cvmfs_client_repositories }}"
+  loop_control:
+    loop_var: repository

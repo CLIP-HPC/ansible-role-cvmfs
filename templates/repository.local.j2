@@ -1,0 +1,6 @@
+{{ ansible_managed | comment }}
+{% if 'env_vars' in repository %}
+{%     for var, val in repository.env_vars.items() %}
+export {{ var }}={{ val }}
+{%     endfor %}
+{% endif %}

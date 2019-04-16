@@ -1,7 +1,12 @@
 ---
 - name: Converge
   hosts: all
+
   roles:
     - role: hephy.cvmfs-client
       vars:
         cvmfs_client_cache_quota: 4000
+        cvmfs_client_repositories:
+          - name: cms.cern.ch
+            env_vars:
+              CMS_LOCAL_SITE: /cvmfs/cms.cern.ch/SITECONF/T2_AT_Vienna
