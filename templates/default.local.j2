@@ -1,8 +1,8 @@
 {{ ansible_managed | comment }}
 {% if cvmfs_client_repositories |default(false) %}
-CVMFS_REPOSITORIES={{ cvmfs_client_repositories.join(',') }}
+CVMFS_REPOSITORIES={{ cvmfs_client_repositories | join(',') }}
 {% endif %}
-CVMFS_HTTP_PROXY={{ cvmfs_client_http_proxy.join(',') }}
+CVMFS_HTTP_PROXY={{ cvmfs_client_http_proxym | join(',') }}
 {% if cvmfs_client_quota_limit > 0 %}
 CVMFS_QUOTA_LIMIT={{ cvmfs_client_quota_limit }}
 {% else %}
