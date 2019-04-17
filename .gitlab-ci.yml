@@ -4,7 +4,7 @@ molecule:
     - hephy
   image: gitlab-registry.cern.ch/hephy-comp/docker-centos7-py36amd:latest
   variables:
-    ROLE: hephy.repo-hephy
+    ROLE: hephy.cvmfs
   before_script:
     - ln -s $CI_PROJECT_NAME ../$ROLE
   script:

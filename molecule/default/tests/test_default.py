@@ -11,9 +11,12 @@ def test_package(host):
 
     assert pkg.is_installed
 
+
 def test_file_on_cvmfs(host):
-    f = host.file('/cvmfs/cms.cern.ch/SITECONF/local/JobConfig/site-local-config.xml')
+    path = '/cvmfs/cms.cern.ch/SITECONF/local/JobConfig/site-local-config.xml'
+    f = host.file(path)
 
     assert f.exists
     assert f.user == 'cvmfs'
     assert f.group == 'cvmfs'
+    assert f.contains('<site name="T2_AT_Vienna">')
