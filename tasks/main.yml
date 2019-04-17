@@ -63,21 +63,6 @@
     src: default.local.j2
     dest: /etc/cvmfs/default.local
 
-- name: Configure autofs
-  block:
-    - name: Add cvmfs to /etc/auto.master
-      lineinfile:
-        path: /etc/auto.master
-        regexp: "^/cvmfs"
-        line: "/cvmfs  program:/etc/auto.cvmfs"
-      notify: Restart autofs
-    - name: Start autofs
-      service:
-        name: autofs
-        enabled: true
-        state: started
-  when: cvmfs_manage_autofs and ansible_virtualization_type != 'docker'
-
 - name: Configure respositories
   template:
     src: repository.local.j2
@@ -93,3 +78,27 @@
   loop: "{{ cvmfs_domains }}"
   loop_control:
     loop_var: repository
+
+- name: Configure autofs
+  block:
+    - name: Add cvmfs to /etc/auto.master
+      lineinfile:
+        path: /etc/auto.master
+        regexp: "^/cvmfs"
+        line: "/cvmfs  program:/etc/auto.cvmfs"
+      notify: Restart autofs
+    - name: Start autofs
+      service:
+        name: autofs
+        enabled: true
+        state: started
+  when: cvmfs_mount_repositories == 'autofs' and ansible_virtualization_type != 'docker'
+
+- name: Mount repositorie
+  mount:
+    path: "/cvmfs/{{ item.name }}"
+    src:  "{{ item.name }}"
+    state: mounted
+    fstype cvmfs
+  loop: "{{ cvmfs_repositories }}"
+  when: cmvfs_mount_repositories == 'mount'
