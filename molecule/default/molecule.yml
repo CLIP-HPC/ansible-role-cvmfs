@@ -8,8 +8,18 @@ lint:
 platforms:
   - name: centos6
     image: centos:6
+    privileged: true
+    # devices:
+    #   - /dev/fuse
+    # capabilities:
+    #   - SYS_ADMIN
   - name: centos7
     image: centos:7
+    privileged: true
+    # devices:
+    #   - /dev/fuse
+    # capabilities:
+    #   - SYS_ADMIN
 provisioner:
   name: ansible
   lint:

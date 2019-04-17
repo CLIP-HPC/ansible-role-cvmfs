@@ -6,6 +6,7 @@
     - role: hephy.cvmfs
       vars:
         cvmfs_quota_limit: 4000
+        cvmfs_mount_repositories: mount
         cvmfs_repositories:
           - name: cms.cern.ch
             env_vars:
