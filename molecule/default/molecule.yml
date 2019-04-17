@@ -28,5 +28,8 @@ scenario:
   name: default
 verifier:
   name: testinfra
+  options:
+    W: ignore::DeprecationWarning
+    junit-xml: ../../default_junit.xml
   lint:
     name: flake8
