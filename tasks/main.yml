@@ -38,7 +38,8 @@
 
 - name: Set permisson on cache
   file:
-    name: "{{ cvmfs_cache_base }}"
+    path: "{{ cvmfs_cache_base }}"
+    state: directory
     owner: cvmfs
     group: cvmfs
     mode: 0700
