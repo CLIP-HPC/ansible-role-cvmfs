@@ -12,4 +12,6 @@ cvmfs_client_http_proxy:
 cvmfs_client_quota_limit: 0
 cvmfs_client_quota_ratio: 0.85
 cvmfs_client_cache_base: /var/cache/cvmfs
-cvmfs_client_env_vars: {}
+cvmfs_client_repositories: []
+cvmfs_client_domains: []
+cvmfs_client_config: {}

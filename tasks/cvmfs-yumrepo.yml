@@ -7,11 +7,6 @@
     enabled: "{{ cvmfs_client_repo_enabled }}"
     gpgcheck: true
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM
-    includepkgs:
-      - cvmfs
-      - cvmfs-keys
-      - cvmfs-server
-      - cvmfs-config-default
     priority: "{{ cvmfs_client_repo_priority }}"
 
 - name: Install CVMFS testing repository
@@ -22,11 +17,6 @@
     enabled: "{{ cvmfs_client_repo_testing_enabled }}"
     gpgcheck: true
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM
-    includepkgs:
-      - cvmfs
-      - cvmfs-keys
-      - cvmfs-server
-      - cvmfs-config-default
     priority: "{{ cvmfs_client_repo_priority }}"
 
 - name: Install CVMFS config repository

@@ -81,3 +81,11 @@
   loop: "{{ cvmfs_client_repositories }}"
   loop_control:
     loop_var: repository
+
+- name: Configure domains
+  template:
+    src: repository.local.j2
+    dest: "/etc/cvmfs/domain.d/{{ repository.name }}.local"
+  loop: "{{ cvmfs_client_domains }}"
+  loop_control:
+    loop_var: repository
