@@ -10,7 +10,7 @@ CVMFS_QUOTA_LIMIT={{ __cvmfs_partition_size * cvmfs_quota_factor | int }}
 CVMFS_MEMCACHE_SIZE={{ cvmfs_memcache_size }}
 {% endif %}
 
-CVMFS_HTTP_PROXY='{{ cvmfs_http_proxy | join(';') |  }}'
+CVMFS_HTTP_PROXY='{{ cvmfs_http_proxy | join(';') }}'
 
 CVMFS_CACHE_BASE='{{ cvmfs_cache_base }}'
 
