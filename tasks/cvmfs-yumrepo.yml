@@ -3,31 +3,31 @@
   yum_repository:
     name: cvmfs
     description: "CVMFS yum repository for el{{ ansible_distribution_major_version }}"
-    baseurl: "{{ cvmfs_client_repo_url }}"
-    enabled: "{{ cvmfs_client_repo_enabled }}"
+    baseurl: "{{ cvmfs_yumrepo_url }}"
+    enabled: "{{ cvmfs_yumrepo_enabled }}"
     gpgcheck: true
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM
-    priority: "{{ cvmfs_client_repo_priority }}"
+    priority: "{{ cvmfs_yumrepo_priority }}"
 
 - name: Install CVMFS testing repository
   yum_repository:
     name: cmfs-testing
     description: "CVMFS yum testing repository for el{{ ansible_distribution_major_version }}"
-    baseurl: "{{ cvmfs_client_repo_testing_url }}"
-    enabled: "{{ cvmfs_client_repo_testing_enabled }}"
+    baseurl: "{{ cvmfs_yumrepo_testing_url }}"
+    enabled: "{{ cvmfs_yumrepo_testing_enabled }}"
     gpgcheck: true
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM
-    priority: "{{ cvmfs_client_repo_priority }}"
+    priority: "{{ cvmfs_yumrepo_priority }}"
 
 - name: Install CVMFS config repository
   yum_repository:
     name: cvmfs-config
     description: "CVMFS yum config repository for el{{ ansible_distribution_major_version }}"
-    baseurl: "{{ cvmfs_client_repo_config_url }}"
-    enabled: "{{ cvmfs_client_repo_config_enabled }}"
+    baseurl: "{{ cvmfs_yumrepo_config_url }}"
+    enabled: "{{ cvmfs_yumrepo_config_enabled }}"
     gpgcheck: true
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM
-    priority: "{{ cvmfs_client_repo_priority }}"
+    priority: "{{ cvmfs_yumrepo_priority }}"
 
 
 - name: Install CernVM gpgkey

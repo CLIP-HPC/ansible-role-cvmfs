@@ -3,10 +3,10 @@
   hosts: all
 
   roles:
-    - role: hephy.cvmfs-client
+    - role: hephy.cvmfs
       vars:
-        cvmfs_client_quota_limit: 4000
-        cvmfs_client_repositories:
+        cvmfs_quota_limit: 4000
+        cvmfs_repositories:
           - name: cms.cern.ch
             env_vars:
               CMS_LOCAL_SITE: /cvmfs/cms.cern.ch/SITECONF/T2_AT_Vienna

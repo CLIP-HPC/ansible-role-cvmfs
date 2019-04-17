@@ -8,7 +8,7 @@
 
 - name: Enable CVMFS repository
   include_tasks: cvmfs-yumrepo.yml
-  when: cvmfs_client_manage_repo
+  when: cvmfs_manage_yumrepo
 
 - name: Install cvmfs
   package:
@@ -34,25 +34,28 @@
         home: /var/lib/cvmfs
         shell: /sbin/nologin
         comment: "CernVM-FS service account"
-  when: cvmfs_client_manage_cvmfs_user and ansible_virtualization_type != 'docker'
+  when: cvmfs_manage_cvmfs_user and ansible_virtualization_type != 'docker'
 
-- name: Set permission for home dir
+- name: Set permisson on cache
   file:
-    name: /var/lib/cvmfs
+    name: "{{ cvmfs_cache_base }}"
     owner: cvmfs
     group: cvmfs
+    mode: 0700
+    setype: cvmfs_cache_t
+
 
 - name: Get size of CVMFS partition
   set_fact:
-    __cvmfs_client_partition_size: "{{ ansible_mounts | json_query(jq) }}"
+    __cvmfs_partition_size: "{{ ansible_mounts | json_query(jq) }}"
   vars:
-    jq: "[?mount=='{{ cvmfs_client_cache_base }}'].size_total"
-  when: cvmfs_client_quota_limit <= 0
+    jq: "[?mount=='{{ cvmfs_cache_base }}'].size_total"
+  when: cvmfs_quota_limit <= 0
 
 - name: Fail in case the partition size cannot be determined
   fail:
-    msg: "Cannot determine size of partition for mount point {{ cvmfs_client_cache_base }}"
-  when: cvmfs_client_quota_limit <= 0 and __cvmfs_partition_size | length  == 0
+    msg: "Cannot determine size of partition for mount point {{ cvmfs_cache_base }}"
+  when: cvmfs_quota_limit <= 0 and __cvmfs_partition_size | length  == 0
 
 - name: Configure CVMFS
   template:
@@ -72,13 +75,13 @@
         name: autofs
         enabled: true
         state: started
-  when: cvmfs_client_manage_autofs and ansible_virtualization_type != 'docker'
+  when: cvmfs_manage_autofs and ansible_virtualization_type != 'docker'
 
 - name: Configure respositories
   template:
     src: repository.local.j2
     dest: "/etc/cvmfs/config.d/{{ repository.name }}.local"
-  loop: "{{ cvmfs_client_repositories }}"
+  loop: "{{ cvmfs_repositories }}"
   loop_control:
     loop_var: repository
 
@@ -86,6 +89,6 @@
   template:
     src: repository.local.j2
     dest: "/etc/cvmfs/domain.d/{{ repository.name }}.local"
-  loop: "{{ cvmfs_client_domains }}"
+  loop: "{{ cvmfs_domains }}"
   loop_control:
     loop_var: repository
