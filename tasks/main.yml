@@ -30,11 +30,12 @@
       user:
         name: cvmfs
         group: cvmfs
+        groups: "{{ 'fuse' if cvmfs_fuse_group else '' }}"
         system: true
         home: /var/lib/cvmfs
         shell: /sbin/nologin
         comment: "CernVM-FS service account"
-  when: cvmfs_manage_cvmfs_user and ansible_virtualization_type != 'docker'
+  when: cvmfs_manage_cvmfs_user
 
 - name: Set permisson on cache
   file:
@@ -44,7 +45,6 @@
     group: cvmfs
     mode: 0700
     setype: cvmfs_cache_t
-
 
 - name: Get size of CVMFS partition
   set_fact:

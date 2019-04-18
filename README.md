@@ -1,48 +1,99 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Install and configure (CVMFS)[https://cernvm.cern.ch/portal/filesystem] client
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should
-be mentioned here. For instance, if the role uses the EC2 module, it may be a
-good idea to mention in this section that the boto package is required.
+* EL6/7
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including
-any variables that are in defaults/main.yml, vars/main.yml, and any variables
-that can/should be set via parameters to the role. Any variables that are read
-from other roles and/or the global scope (ie. hostvars, group vars, etc.) should
-be mentioned here as well.
+Manage CVMFS Yum repository and configure it.
 
-Dependencies
-------------
+    cvmfs_manage_yumrepo: true
+    cvmfs_yumrepo_enabled: true
+    cvmfs_yumrepo_testing_enabled: false
+    cvmfs_yumrepo_config_enabled: false
+    cvmfs_yumrepo_priority: 10
 
-A list of other roles hosted on Galaxy should go here, plus any details in
-regards to parameters that may need to be set for other roles, or variables that
-are used from other roles.
+Manage the creation of a cvmfs user and group
+
+    cvmfs_manage_cvmfs_user: true
+
+Mount repositories using autofs or by explicit mount
+
+    cvmfs_mount_repositories: [ autofs | mount ]
+
+The configuration of a CVMFS client is described in more details at
+ https://cvmfs.readthedocs.io/en/stable/
+
+Some settings can be set by variables
+
+Define the http proxy
+
+    cvmfs_http_proxy:
+      - http://squid01.example.org:3128|http://squid02.example.org:3128
+      - DIRECT
+
+The location of then cache is given by
+
+    cvmfs_cache_base: /var/cache/cvmfs
+
+The size of the cache can be set explicit using
+
+    cvmfs_cache_quota: 4000
+
+In case the cache is on a separate partition, its size can be given
+as a fraction of the partition size
+
+    cvmfs_quota_fraction: 0.85
+
+Other settings can be done by a passing a hash to
+
+    cvmfs_config:
+      CVMFS_USE_GEOAPI: yes
+
+Repositories and their settings are provided as a hash
+
+   cvmfs_repositories:
+     - name: cms.cern.ch
+       config:
+         CMS_CACHE_BASE: /var/lib/test
+       env_vars:
+         CMS_LOCAL_SITE: /cvmfs/cms.cern.ch/SITECONF/T2_AT_Vienna
+
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables
-passed in as parameters) is always nice for users too:
 
     - hosts: servers
       roles:
-         - { role: hephy.cvmfs-client, x: 42 }
+         - role: hephy.cvmfs
+           vars:
+             cvmfs_quota_limit: 4000
+             cvmfs_repositories:
+               - name: cms.cern.ch
+                 env_vars:
+                   CMS_LOCAL_SITE: /cvmfs/cms.cern.ch/SITECONF/T2_AT_Vienna
+               - name: belle.cern.ch
+
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
 An optional section for the role authors to include contact information, or a
 website (HTML is not allowed).
+
+Written by [Dietrich Liko](http://hephy.at/dliko) in April 2019
+
+[Institute for High Energy Physics](http://www.hephy.at) of the
+[Austrian Academy of Sciences](http://www.oeaw.ac.at)
