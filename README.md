@@ -58,12 +58,12 @@ Other settings can be done by a passing a hash to
 
 Repositories and their settings are provided as a hash
 
-   cvmfs_repositories:
-     - name: cms.cern.ch
-       config:
-         CMS_CACHE_BASE: /var/lib/test
-       env_vars:
-         CMS_LOCAL_SITE: /cvmfs/cms.cern.ch/SITECONF/T2_AT_Vienna
+    cvmfs_repositories:
+      - name: cms.cern.ch
+        config:
+          CMS_CACHE_BASE: /var/lib/test
+        env_vars:
+          CMS_LOCAL_SITE: /cvmfs/cms.cern.ch/SITECONF/T2_AT_Vienna
 
 
 Example Playbook
