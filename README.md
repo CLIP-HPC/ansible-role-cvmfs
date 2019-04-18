@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Install and configure (CVMFS)[https://cernvm.cern.ch/portal/filesystem] client
+Install and configure [CVMFS](https://cernvm.cern.ch/portal/filesystem) client
 
 Requirements
 ------------
@@ -90,8 +90,6 @@ MIT
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a
-website (HTML is not allowed).
 
 Written by [Dietrich Liko](http://hephy.at/dliko) in April 2019
 
