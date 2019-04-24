@@ -2,9 +2,9 @@
 molecule:
   tags:
     - hephy
-  image: gitlab-registry.cern.ch/hephy-comp/docker-centos7-py36amd:latest
+  image: gitlab-registry.cern.ch/hephyvienna/docker-centos7-py36amd:latest
   variables:
-    ROLE: hephy.cvmfs
+    ROLE: hephyvienna.cvmfs
   before_script:
     - ln -s $CI_PROJECT_NAME ../$ROLE
   script:

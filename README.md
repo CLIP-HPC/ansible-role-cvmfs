@@ -72,7 +72,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - role: hephy.cvmfs
+         - role: hephyvienna.cvmfs
            vars:
              cvmfs_quota_limit: 4000
              cvmfs_repositories:
@@ -89,7 +89,6 @@ MIT
 
 Author Information
 ------------------
-
 
 Written by [Dietrich Liko](http://hephy.at/dliko) in April 2019
 

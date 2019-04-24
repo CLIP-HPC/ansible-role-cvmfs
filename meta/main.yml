@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  rome_name: hephy.cvmfs
+  rome_name: cvmfs
   author: Dietrich Liko
   description: CVMFS client
   company: Institute for High energy Physics, Austrian Academy of Sciences
