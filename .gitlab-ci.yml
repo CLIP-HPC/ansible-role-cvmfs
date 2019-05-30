@@ -1,8 +1,31 @@
 ---
-molecule:
+centos6:
   tags:
-    - hephy
-  image: gitlab-registry.cern.ch/hephyvienna/docker-centos7-py36amd:latest
+    - dood
+  image: gitlab-registry.cern.ch/hephyvienna/docker/centos7-molecule:latest
+  variables:
+    ROLE: hephyvienna.cvmfs
+    MOLECULE_IMAGE: centos:6
+  before_script:
+    - ln -s $CI_PROJECT_NAME ../$ROLE
+  script:
+    - docker --version
+    - python --version
+    - ansible --version
+    - molecule --version
+    - molecule test
+    - junit2html default_junit.xml default_junit.html
+  artifacts:
+    reports:
+      junit: default_junit.xml
+    paths:
+      - default_junit.xml
+      - default_junit.html
+
+centos7:
+  tags:
+    - dood
+  image: gitlab-registry.cern.ch/hephyvienna/docker/centos7-molecule:latest
   variables:
     ROLE: hephyvienna.cvmfs
   before_script:

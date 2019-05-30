@@ -11,52 +11,51 @@ Requirements
 Role Variables
 --------------
 
-Manage CVMFS Yum repository and configure it.
+The configuration of a CVMFS client is described in more details at
+ https://cvmfs.readthedocs.io/en/stable/
 
-    cvmfs_manage_yumrepo: true
+
+    cvmfs_manage_yumrepo: false
     cvmfs_yumrepo_enabled: true
     cvmfs_yumrepo_testing_enabled: false
     cvmfs_yumrepo_config_enabled: false
     cvmfs_yumrepo_priority: 10
 
-Manage the creation of a cvmfs user and group
+Manage CVMFS Yum repository and configure it.
 
     cvmfs_manage_cvmfs_user: true
 
-Mount repositories using autofs or by explicit mount
+
+Manage the creation of a cvmfs user and group
 
     cvmfs_mount_repositories: [ autofs | mount ]
 
-The configuration of a CVMFS client is described in more details at
- https://cvmfs.readthedocs.io/en/stable/
-
-Some settings can be set by variables
-
-Define the http proxy
+Mount repositories using autofs or by explicit mount
 
     cvmfs_http_proxy:
       - http://squid01.example.org:3128|http://squid02.example.org:3128
       - DIRECT
 
-The location of then cache is given by
+Define the http proxy
 
     cvmfs_cache_base: /var/cache/cvmfs
 
-The size of the cache can be set explicit using
+The location of the cache
 
     cvmfs_cache_quota: 4000
+
+The size of the cache
+
+    cvmfs_quota_fraction: 0.85
 
 In case the cache is on a separate partition, its size can be given
 as a fraction of the partition size
 
-    cvmfs_quota_fraction: 0.85
-
-Other settings can be done by a passing a hash to
-
     cvmfs_config:
       CVMFS_USE_GEOAPI: yes
 
-Repositories and their settings are provided as a hash
+Other global settings can be passed by a hash
+
 
     cvmfs_repositories:
       - name: cms.cern.ch
@@ -65,10 +64,11 @@ Repositories and their settings are provided as a hash
         env_vars:
           CMS_LOCAL_SITE: /cvmfs/cms.cern.ch/SITECONF/T2_AT_Vienna
 
+Repositories and their settings are provided as a hash
+
 
 Example Playbook
 ----------------
-
 
     - hosts: servers
       roles:
@@ -80,7 +80,6 @@ Example Playbook
                  env_vars:
                    CMS_LOCAL_SITE: /cvmfs/cms.cern.ch/SITECONF/T2_AT_Vienna
                - name: belle.cern.ch
-
 
 License
 -------
