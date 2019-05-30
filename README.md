@@ -1,15 +1,12 @@
-Role Name
-=========
+# cvmfs
 
 Install and configure [CVMFS](https://cernvm.cern.ch/portal/filesystem) client
 
-Requirements
-------------
+## Requirements
 
 * EL6/7
 
-Role Variables
---------------
+## Role Variables
 
 The configuration of a CVMFS client is described in more details at
  https://cvmfs.readthedocs.io/en/stable/
@@ -67,8 +64,7 @@ Other global settings can be passed by a hash
 Repositories and their settings are provided as a hash
 
 
-Example Playbook
-----------------
+## Example Playbook
 
     - hosts: servers
       roles:
@@ -81,13 +77,11 @@ Example Playbook
                    CMS_LOCAL_SITE: /cvmfs/cms.cern.ch/SITECONF/T2_AT_Vienna
                - name: belle.cern.ch
 
-License
--------
+## License
 
 MIT
 
-Author Information
-------------------
+## Author Information
 
 Written by [Dietrich Liko](http://hephy.at/dliko) in April 2019
 
