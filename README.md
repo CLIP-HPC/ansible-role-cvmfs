@@ -2,14 +2,15 @@
 
 Install and configure [CVMFS](https://cernvm.cern.ch/portal/filesystem) client
 
+Inspired by the [Puppet Module](https://github.com/cvmfs/puppet-cvmfs)
+
 ## Requirements
 
-* EL6/7
+*   EL6/7
 
 ## Role Variables
 
-The configuration of a CVMFS client is described in more details at
- https://cvmfs.readthedocs.io/en/stable/
+The configuration of a CVMFS client is described in more details in the [documentation](https://cvmfs.readthedocs.io/en/stable/)
 
 
     cvmfs_manage_yumrepo: false
