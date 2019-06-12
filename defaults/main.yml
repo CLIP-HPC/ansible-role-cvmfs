@@ -1,6 +1,6 @@
 ---
 # defaults file for hephy.cvmfs
-cvmfs_manage_yumrepo: true
+cvmfs_manage_yumrepo: false
 cvmfs_yumrepo_enabled: true
 cvmfs_yumrepo_testing_enabled: false
 cvmfs_yumrepo_config_enabled: false

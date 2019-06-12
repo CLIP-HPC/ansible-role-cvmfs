@@ -1,6 +1,9 @@
 ---
 dependency:
   name: galaxy
+  # FIXME: workaround for problem on mac
+  options:
+    ignore-certs: True
 driver:
   name: docker
 lint:
@@ -22,7 +25,8 @@ scenario:
 verifier:
   name: testinfra
   options:
+    # FIXME
     W: ignore::DeprecationWarning
-    junit-xml: ../../default_junit.xml
+    junit-xml: junit.xml
   lint:
     name: flake8

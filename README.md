@@ -1,4 +1,4 @@
-# cvmfs
+# cvmfs [![Build Status](https://travis-ci.com/hephyvienna/ansible-role-cvmfs.svg?branch=master)](https://travis-ci.com/hephyvienna/ansible-role-cvmfs) [![Ansible Role](https://img.shields.io/ansible/role/40972.svg)](https://galaxy.ansible.com/hephyvienna/cvmfs)
 
 Install and configure [CVMFS](https://cernvm.cern.ch/portal/filesystem) client
 
@@ -12,7 +12,6 @@ Inspired by the [Puppet Module](https://github.com/cvmfs/puppet-cvmfs)
 
 The configuration of a CVMFS client is described in more details in the [documentation](https://cvmfs.readthedocs.io/en/stable/)
 
-
     cvmfs_manage_yumrepo: false
     cvmfs_yumrepo_enabled: true
     cvmfs_yumrepo_testing_enabled: false
@@ -22,7 +21,6 @@ The configuration of a CVMFS client is described in more details in the [documen
 Manage CVMFS Yum repository and configure it.
 
     cvmfs_manage_cvmfs_user: true
-
 
 Manage the creation of a cvmfs user and group
 
@@ -63,7 +61,6 @@ Other global settings can be passed by a hash
           CMS_LOCAL_SITE: /cvmfs/cms.cern.ch/SITECONF/T2_AT_Vienna
 
 Repositories and their settings are provided as a hash
-
 
 ## Example Playbook
 
