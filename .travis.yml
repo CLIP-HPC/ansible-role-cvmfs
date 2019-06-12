@@ -4,7 +4,7 @@ services: docker
 
 env:
   global:
-    - ROLE_NAME: workernode
+    - ROLE_NAME: cvmfs
   matrix:
     - MOLECULE_DISTRO: centos:7
     - MOLECULE_DISTRO: centos:6
