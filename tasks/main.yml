@@ -63,6 +63,11 @@
     src: default.local.j2
     dest: /etc/cvmfs/default.local
 
+- name: tmp fix add belle.kek.jp repo pub key
+  file:
+    src: belle.kek.jp.pub
+    dest: /etc/cvmfs/keys/
+
 - name: Configure respositories
   template:
     src: repository.local.j2
